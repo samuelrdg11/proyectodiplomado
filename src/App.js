@@ -1,25 +1,36 @@
-import logo from './logo.svg';
 import './App.css';
+import React from 'react'
+import Home from './Components/Home';
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
+import Welcome from './Components/Welcome';
+import {auth} from "./firebase";
+import { useEffect } from 'react'
+import Navbar from './Components/Navbar';
 
 function App() {
-  return (
+  const [firebaseUser, setFirebaseUser]=React.useState(false)
+
+  useEffect(()=>{
+    auth.onAuthStateChanged(user=>{
+      if (user) {
+        setFirebaseUser(user)
+      }else{
+        setFirebaseUser(null)
+      }
+    })
+  },[])
+  return firebaseUser!==false ? (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <BrowserRouter>
+        <Navbar firebaseUser={firebaseUser}/>
+        <Routes>
+          <Route path='/' element={ <Welcome />} />
+          <Route path='/Home' element={ <Home />} />
+        </Routes>
+    </BrowserRouter>
     </div>
-  );
+  ):
+  (<p className="text-center"><b>¡Cargando...!</b></p>);
 }
 
 export default App;

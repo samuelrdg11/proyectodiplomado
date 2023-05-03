@@ -20,7 +20,7 @@ const Home = () => {
     <div>
       {
         user && (
-          <BooksCrud/>
+          <h1>Bienvenido</h1>
           )
       }
     </div>
@@ -28,4 +28,3 @@ const Home = () => {
 }
 
 export default Home
-

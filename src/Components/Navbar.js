@@ -17,17 +17,22 @@ const Navbar = (props) => {
        <Link className='textnavbar navbar-brand' to="/">Data 'Booker'</Link> 
             <div className='d-flex'>
                 {
-                   props.firebaseUser !==null ?(
+                   props.firebaseUser !==null ?
+                   (
                       <Link to="/books" className='botones btn btn-sm'>Book Admin</Link>
                    ):
                    null
                 }
                 {
-                  props.firebaseUser !==null ?(
-                    <button className='botones btn btn-sm' onClick={()=>cerrarSesion()}>Cerrar sesión</button>
+                  props.firebaseUser !==null ?
+                  (
+                    <button className='botones btn btn-sm' onClick={()=>cerrarSesion()}>LogOut</button>
                   ):
                   (
-                    <Link to="/LogIn" className='botones btn btn-sm'>Login</Link>
+                    <>
+                      <Link to="/" className='botones btn btn-sm'>Inicio</Link>
+                      <Link to="/LogIn" className='botones btn btn-sm'>LogIn</Link>
+                    </>
                   )
                 }
             

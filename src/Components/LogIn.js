@@ -88,13 +88,13 @@ const LogIn = () => {
 
   return (
     <div className='main'>
+      <div className="row justify-content-center">
       <h5 className='text-center mb-3 mt-3'>
         {
           registro ? 'Crea una cuenta' : 'Inicio de sesión'
         }
       </h5>
-      <div className="row justify-content-center">
-        <div className="col-12 col-sm-10 col-md-6 col-xl-4">
+        
           <form onSubmit={guardarDatos}>
             {
               error && (
@@ -133,7 +133,7 @@ const LogIn = () => {
           </form>
         </div>
       </div>
-    </div>
+    
   )
 }
 

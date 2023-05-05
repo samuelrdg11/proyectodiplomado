@@ -52,17 +52,9 @@ const BooksCrud = () => {
     </div>
   </div>
     <div className="container">
-      <Row className="my-4">
-        <Col md={6} xs={12}>
-          <h2>Book Admin</h2>
-        </Col>
-        <Col md={6} xs={12} className="text-end">
-          <Button variant="primary" onClick={handleAddBook}>
-            Añadir libro
-          </Button>
-        </Col>
-      </Row>
-
+    
+        <button className='botonAñadir btn btn-sm' onClick={handleAddBook}>Agregar libro</button>
+   
       <Table responsive striped bordered hover>
         <thead>
           <tr>

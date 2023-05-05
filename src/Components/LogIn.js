@@ -40,7 +40,7 @@ const LogIn = () => {
       setPassword('')
       setError('')
       navigate("/Home")
-    } 
+    }
     catch (error) {
       if (error.code === 'auth/invalid-email') {
         setError('¡El email ingresado no es válido!')
@@ -54,7 +54,7 @@ const LogIn = () => {
 
     }
 
-  },[email, password])
+  }, [email, password])
 
   const registrar = useCallback(async () => {
     try {
@@ -70,8 +70,8 @@ const LogIn = () => {
       setEmail('')
       setPassword('')
       setError(null)
-      
-    } 
+
+    }
     catch (error) {
       if (error.code === 'auth/invalid-email') {
         setError('¡El email ingresado no es válido!')
@@ -86,22 +86,23 @@ const LogIn = () => {
   }, [email, password])
 
   return (
-    <div className='main'>
-      <div className="row justify-content-center">
-      <h5 className='text-center mb-3 mt-3'>
-        {
-          registro ? 'Crea una cuenta' : 'Inicio de sesión'
-        }
-      </h5>
-        
-          <form onSubmit={guardarDatos}>
+    <>
+      {
+        error && (
+          <div className='alert alert-warning'>
+            {error}
+          </div>
+        )
+      }
+      <div className='main'>
+        <div className="row justify-content-center">
+          <h5 className='text-center mb-3 mt-3'>
             {
-              error && (
-                <div className='alert alert-warning'>
-                  {error}
-                </div>
-              )
+              registro ? 'Crea una cuenta' : 'Inicio de sesión'
             }
+          </h5>
+
+          <form onSubmit={guardarDatos}>
             <input type="email"
               className='form-control mb-2'
               placeholder='Ingrese su email'
@@ -132,7 +133,7 @@ const LogIn = () => {
           </form>
         </div>
       </div>
-    
+    </>
   )
 }
 

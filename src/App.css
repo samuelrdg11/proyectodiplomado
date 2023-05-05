@@ -83,3 +83,26 @@
     font-size: 13px;
   }
 }
+.whatsapp {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
+svg {
+  width: 45px;
+  color: rgb(46, 204, 49);
+}
+.alert {
+  width: 270px;
+  margin: 0 auto;
+}
+.botonesChat {
+  width: 260px;
+  font-size: 12px;
+  padding: 6px;
+  background-color: #2497c5e3;
+  color: #ffff;
+  border-radius: 8px;
+  border: none;
+  text-decoration: none;
+}

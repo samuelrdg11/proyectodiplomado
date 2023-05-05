@@ -5,7 +5,6 @@ const Navbar = () => {
   return (
     <div>
       <h1>Welcome</h1>
-      <LogIn />
     </div>
   )
 }

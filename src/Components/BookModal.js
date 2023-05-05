@@ -46,7 +46,7 @@ const BookModal = ({ showModal, handleCloseModal, editId }) => {
           </Form.Group>
           <Form.Group className="mb-3">
             <Form.Label>Genero</Form.Label>
-            <Form.Control as="textarea" placeholder="Genero" value={genero} onChange={e => setGenero(e.target.value)} className="form-control" />
+            <Form.Control type="text" placeholder="Genero" value={genero} onChange={e => setGenero(e.target.value)} className="form-control" />
           </Form.Group>
         </Form>
       </Modal.Body>

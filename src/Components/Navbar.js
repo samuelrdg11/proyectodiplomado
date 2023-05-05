@@ -18,7 +18,10 @@ const Navbar = (props) => {
             <div className='d-flex'>
                 {
                    props.firebaseUser !==null ?(
-                    <Link to="/Home" className='btn btn-dark btn-sm'>Libros</Link>
+                    <>
+                      <Link to="/books" className='btn btn-dark btn-sm'>Book Admin</Link>
+                      <Link to="/Home" className='btn btn-dark btn-sm'>Inicio</Link>
+                    </>
                    ):
                    null
                 }

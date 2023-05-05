@@ -39,26 +39,21 @@ const BooksCrud = () => {
 
   return (
     <>
-  <div>
-    <div className="input-group flex-nowrap">
+
+    <div className='container'>
       <input
         type="text"
-        className="form-control"
+        className="inputFiltrar form-control"
         placeholder="Titulo o autor del libro"
-        aria-label="Username"
-        aria-describedby="addon-wrapping" 
         onChange={(e) => setSearch(e.target.value)}
       />
     </div>
-  </div>
     <div className="container">
-    
-        <button className='botonAñadir btn btn-sm' onClick={handleAddBook}>Agregar libro</button>
-   
-      <Table responsive striped bordered hover>
+      <button className='botonAñadir btn btn-sm' onClick={handleAddBook}>Agregar libro</button>
+      <Table className='tableBooks' responsive striped bordered hover variant="dark">
         <thead>
           <tr>
-            <th>Titulo</th>
+            <th>Título</th>
             <th>Autor</th>
             <th>Genero</th>
             <th>Acciones</th>
@@ -73,13 +68,9 @@ const BooksCrud = () => {
             <td>{book.autor}</td>
             <td>{book.genero}</td>
             <td>
-                <Button variant="primary" onClick={() => handleEditBook(book)}>
-                  Editar
-                </Button>
-                <Button variant="danger" onClick={() => handleDeleteBook(book.id)}>
-                  Eliminar
-                </Button>
-              </td>
+             <button className='botonEditar btn btn-sm' onClick={() => handleEditBook(book)}>Editar</button>
+              <button className='botonEliminar btn btn-sm' onClick={() => handleDeleteBook(book.id)}>Eliminar</button>
+            </td>
           </tr>
         ))}
         </tbody>

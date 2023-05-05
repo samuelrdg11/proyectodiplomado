@@ -1,5 +1,4 @@
 import React from 'react'
-import LogIn from './LogIn'
 
 const Navbar = () => {
   return (

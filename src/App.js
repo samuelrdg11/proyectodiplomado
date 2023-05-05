@@ -1,13 +1,14 @@
 import './App.css';
 import React from 'react'
 import Home from './Components/Home';
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Welcome from './Components/Welcome';
 import {auth} from "./firebase";
 import { useEffect } from 'react'
 import Navbar from './Components/Navbar';
 import BooksCrud from './Components/BooksCrud';
 import LogIn from './Components/LogIn';
+import Chat from './Components/Chat'
 
 function App() {
   const [firebaseUser, setFirebaseUser]=React.useState(false)
@@ -31,6 +32,7 @@ function App() {
           <Route path='/Books' element={ <BooksCrud />} />
           <Route path='/LogIn' element={ <LogIn />} />
         </Routes>
+        <Chat />
       </BrowserRouter>
     </div>
   ):

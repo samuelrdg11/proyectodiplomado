@@ -36,7 +36,6 @@ const LogIn = () => {
   const login = useCallback(async () => {
     try {
       const res = await auth.signInWithEmailAndPassword(email, password)
-      
       setEmail('')
       setPassword('')
       setError('')

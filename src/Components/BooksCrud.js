@@ -1,13 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import { db } from '../firebase';
-import { Table, Button, Row, Col } from 'react-bootstrap';
+import { Table } from 'react-bootstrap';
 import BookModal from './BookModal';
+import { useNavigate } from 'react-router-dom'
+import { auth } from '../firebase'
 
 const BooksCrud = () => {
   const [books, setBooks] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [editId, setEditId] = useState(null)
   const [search, setSearch] = useState('');
+  const [user, setUser] = React.useState(null)
+  const navigate = useNavigate()
+
+  React.useEffect(() => {
+    if (auth.currentUser) {
+      setUser(auth.currentUser)
+    } else {
+      navigate("/")
+    }
+  }, [navigate])
 
   useEffect(() => {
     const unsubscribe = db.collection('books').onSnapshot(snapshot => {
@@ -38,47 +50,48 @@ const BooksCrud = () => {
   };
 
   return (
-    <>
-
     <div className='container'>
-      <input
-        type="text"
-        className="inputFiltrar form-control"
-        placeholder="Titulo o autor del libro"
-        onChange={(e) => setSearch(e.target.value)}
-      />
+      {
+        user && (
+          <>
+            <input
+              type="text"
+              className="inputFiltrar form-control"
+              placeholder="Titulo o autor del libro"
+              onChange={(e) => setSearch(e.target.value)}
+            />
+            <div className="container">
+              <button className='botonAñadir btn btn-sm' onClick={handleAddBook}>Agregar libro</button>
+              <Table className='tableBooks' responsive striped bordered hover variant="dark">
+                <thead>
+                  <tr>
+                    <th>Título</th>
+                    <th>Autor</th>
+                    <th>Genero</th>
+                    <th>Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {books.filter((book) => {
+                    return search.toLocaleLowerCase() === '' ? book : book.autor.includes(search) || book.titulo.includes(search)
+                  }).map((book) => (
+                    <tr key={book.id}>
+                      <td>{book.titulo}</td>
+                      <td>{book.autor}</td>
+                      <td>{book.genero}</td>
+                      <td>
+                        <button className='botonEditar btn btn-sm' onClick={() => handleEditBook(book)}>Editar</button>
+                        <button className='botonEliminar btn btn-sm' onClick={() => handleDeleteBook(book.id)}>Eliminar</button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </Table>
+              <BookModal showModal={showModal} handleCloseModal={handleCloseModal} editId={editId} />
+            </div>
+          </>
+        )}
     </div>
-    <div className="container">
-      <button className='botonAñadir btn btn-sm' onClick={handleAddBook}>Agregar libro</button>
-      <Table className='tableBooks' responsive striped bordered hover variant="dark">
-        <thead>
-          <tr>
-            <th>Título</th>
-            <th>Autor</th>
-            <th>Genero</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-        {books.filter((book) => {
-          return search.toLocaleLowerCase() === '' ? book : book.autor.includes(search) || book.titulo.includes(search)
-        }).map((book) => (
-          <tr key={book.id}>
-            <td>{book.titulo}</td>
-            <td>{book.autor}</td>
-            <td>{book.genero}</td>
-            <td>
-             <button className='botonEditar btn btn-sm' onClick={() => handleEditBook(book)}>Editar</button>
-              <button className='botonEliminar btn btn-sm' onClick={() => handleDeleteBook(book.id)}>Eliminar</button>
-            </td>
-          </tr>
-        ))}
-        </tbody>
-      </Table>
-
-      <BookModal showModal={showModal} handleCloseModal={handleCloseModal} editId={editId} />
-    </div>
-    </>
   );
 };
 

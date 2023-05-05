@@ -73,7 +73,8 @@ const BooksCrud = () => {
                 </thead>
                 <tbody>
                   {books.filter((book) => {
-                    return search.toLocaleLowerCase() === '' ? book : book.autor.includes(search) || book.titulo.includes(search)
+                    return search.toLocaleLowerCase() === '' ? 
+                    book : book.autor.toLocaleLowerCase().includes(search.toLocaleLowerCase()) || book.titulo.toLocaleLowerCase().includes(search.toLocaleLowerCase())
                   }).map((book) => (
                     <tr key={book.id}>
                       <td>{book.titulo}</td>

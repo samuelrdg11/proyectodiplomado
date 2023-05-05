@@ -6,7 +6,8 @@ import BookModal from './BookModal';
 const BooksCrud = () => {
   const [books, setBooks] = useState([]);
   const [showModal, setShowModal] = useState(false);
-  const [editId, setEditId] = useState(null);
+  const [editId, setEditId] = useState(null)
+  const [search, setSearch] = useState('');
 
   useEffect(() => {
     const unsubscribe = db.collection('books').onSnapshot(snapshot => {
@@ -37,6 +38,19 @@ const BooksCrud = () => {
   };
 
   return (
+    <>
+  <div>
+    <div className="input-group flex-nowrap">
+      <input
+        type="text"
+        className="form-control"
+        placeholder="Titulo o autor del libro"
+        aria-label="Username"
+        aria-describedby="addon-wrapping" 
+        onChange={(e) => setSearch(e.target.value)}
+      />
+    </div>
+  </div>
     <div className="container">
       <Row className="my-4">
         <Col md={6} xs={12}>
@@ -59,12 +73,14 @@ const BooksCrud = () => {
           </tr>
         </thead>
         <tbody>
-          {books.map(book => (
-            <tr key={book.id}>
-              <td>{book.titulo}</td>
-              <td>{book.autor}</td>
-              <td>{book.genero}</td>
-              <td>
+        {books.filter((book) => {
+          return search.toLocaleLowerCase() === '' ? book : book.autor.includes(search) || book.titulo.includes(search)
+        }).map((book) => (
+          <tr key={book.id}>
+            <td>{book.titulo}</td>
+            <td>{book.autor}</td>
+            <td>{book.genero}</td>
+            <td>
                 <Button variant="primary" onClick={() => handleEditBook(book)}>
                   Editar
                 </Button>
@@ -72,13 +88,14 @@ const BooksCrud = () => {
                   Eliminar
                 </Button>
               </td>
-            </tr>
-          ))}
+          </tr>
+        ))}
         </tbody>
       </Table>
 
       <BookModal showModal={showModal} handleCloseModal={handleCloseModal} editId={editId} />
     </div>
+    </>
   );
 };
 

@@ -1,8 +1,27 @@
 .App {
   text-align: center;
 }
-
 .main { 
   margin: 0 auto;
   width: 80%;
+  margin-top: 11%;
+}
+.navbar {
+  margin-bottom: 10px;
+}
+.textnavbar {
+  margin-left: 20px;
+}
+.botones {
+    font-size: 12px;
+    padding: 6px;
+    background-color: #2d2b92e3;
+    color: #ffff;
+    border-radius: 8px;
+    border: none;
+    margin-right: 5px;
+    text-decoration: none;
+}
+.botonSwitch{
+  font-weight: bolder;
 }

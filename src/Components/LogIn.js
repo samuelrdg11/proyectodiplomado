@@ -121,7 +121,7 @@ const LogIn = () => {
                   registro ? 'Crea una cuenta' : 'Ingreso al sistema'
                 }
               </button>
-              <button className='btn btn-outline-warning btn-sm'
+              <button className='botonSwitch btn btn-sm'
                 onClick={() => { setRegistro(!registro) }}
                 type='button'
               >

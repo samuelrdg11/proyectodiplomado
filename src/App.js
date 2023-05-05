@@ -7,6 +7,7 @@ import {auth} from "./firebase";
 import { useEffect } from 'react'
 import Navbar from './Components/Navbar';
 import BooksCrud from './Components/BooksCrud';
+import LogIn from './Components/LogIn';
 
 function App() {
   const [firebaseUser, setFirebaseUser]=React.useState(false)
@@ -28,6 +29,7 @@ function App() {
           <Route path='/' element={ <Welcome />} />
           <Route path='/Home' element={ <Home />} />
           <Route path='/books' element={ <BooksCrud />} />
+          <Route path='/LogIn' element={ <LogIn />} />
         </Routes>
       </BrowserRouter>
     </div>

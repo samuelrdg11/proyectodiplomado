@@ -4,6 +4,7 @@ import { auth } from '../firebase'
 
 const Navbar = (props) => {
   const navigate = useNavigate()
+  
   const cerrarSesion=()=>{
     auth.signOut()
     .then(()=>{
@@ -12,27 +13,24 @@ const Navbar = (props) => {
   }
 
   return (
-    <div className="navbar navbar-dark bg-dark ">
-       <Link className='navbar-brand mb-0 h1' to="/">Navbar</Link> 
-        <div>
+    <div className="navbar navbar-dark bg-dark">
+       <Link className='textnavbar navbar-brand' to="/">Data 'Booker'</Link> 
             <div className='d-flex'>
                 {
                    props.firebaseUser !==null ?(
-                    <>
-                      <Link to="/books" className='btn btn-dark btn-sm'>Book Admin</Link>
-                      <Link to="/Home" className='btn btn-dark btn-sm'>Inicio</Link>
-                    </>
+                      <Link to="/books" className='botones btn btn-sm'>Book Admin</Link>
                    ):
                    null
                 }
                 {
                   props.firebaseUser !==null ?(
-                    <button className='btn btn-dark btn-sm' onClick={()=>cerrarSesion()}>Cerrar sesión</button>
-                  ):(
-                    <Link to="/" className='btn btn-dark btn-sm'>Login</Link>
+                    <button className='botones btn btn-sm' onClick={()=>cerrarSesion()}>Cerrar sesión</button>
+                  ):
+                  (
+                    <Link to="/LogIn" className='botones btn btn-sm'>Login</Link>
                   )
                 }
-            </div>
+            
         </div>
     </div>
   )

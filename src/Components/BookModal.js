@@ -6,6 +6,8 @@ const BookModal = ({ showModal, handleCloseModal, editId }) => {
   const [titulo, setTitulo] = useState('');
   const [autor, setAutor] = useState('');
   const [genero, setGenero] = useState('');
+  const [portada, setPortada] = useState('');
+  const [disponibilidad, setDisponibilidad] = useState(true);
 
   useEffect(() => {
     if (editId) {
@@ -16,18 +18,34 @@ const BookModal = ({ showModal, handleCloseModal, editId }) => {
           setTitulo(doc.data().titulo);
           setAutor(doc.data().autor);
           setGenero(doc.data().genero);
+          setPortada(doc.data().portada);
+          setDisponibilidad(doc.data().disponibilidad);
         });
     }
   }, [editId]);
 
-  const handleSaveBook = () => {
+  const handleSaveBook =  async () => {
     if (editId) {
-      db.collection('books').doc(editId).update({ titulo, autor, genero });
+      db.collection('books').doc(editId).update({ titulo, autor, genero, portada,disponibilidad });
     } else {
-      db.collection('books').add({ titulo, autor, genero });
+      const base64Portada = await convertBase64(portada);
+      db.collection('books').add({ titulo, autor, genero, base64Portada, disponibilidad });
     }
     handleCloseModal();
   };
+
+  const convertBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(file)
+      fileReader.onload = () => {
+        resolve(fileReader.result);
+      }
+      fileReader.onerror = (error) => {
+        reject(error);
+      }
+    })
+  }
 
   return (
     <Modal show={showModal} onHide={handleCloseModal}>
@@ -47,6 +65,10 @@ const BookModal = ({ showModal, handleCloseModal, editId }) => {
           <Form.Group className="mb-3">
             <Form.Label>Genero</Form.Label>
             <Form.Control type="text" placeholder="Genero" value={genero} onChange={e => setGenero(e.target.value)} className="form-control" />
+          </Form.Group>
+          <Form.Group className="mb-3">
+            <Form.Label>Portada</Form.Label>
+            <Form.Control type="file" placeholder="Portada"  onChange={e => setPortada(e.target.files[0])} className="form-control" />
           </Form.Group>
         </Form>
       </Modal.Body>

@@ -14,13 +14,13 @@ const Navbar = (props) => {
 
   return (
     <div className="navbar navbar-dark bg-dark">
-       <Link className='textnavbar navbar-brand' to="/">Data 'Booker'</Link> 
+       <Link className='textnavbar navbar-brand' to="/Home">Data 'Booker'</Link> 
             <div className='d-flex'>
                 {
                   props.firebaseUser !==null ?
                   (
                     <>
-                    <Link to="/Books" className='botones btn btn-sm'>Book Admin</Link>
+                    <Link to="/Books" className='botones btn btn-sm'>Book list</Link>
                     <button className='botones btn btn-sm' onClick={()=>cerrarSesion()}>LogOut</button>
                     </>
                   ):

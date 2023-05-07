@@ -25,6 +25,7 @@ const BooksCrud = () => {
     const unsubscribe = db.collection('books').onSnapshot(snapshot => {
       const booksData = [];
       snapshot.forEach(doc => booksData.push({ id: doc.id, ...doc.data() }));
+      console.log(booksData)
       setBooks(booksData);
     });
 
@@ -68,6 +69,7 @@ const BooksCrud = () => {
                     <th>Título</th>
                     <th>Autor</th>
                     <th>Genero</th>
+                    <th>Portada</th>
                     <th>Acciones</th>
                   </tr>
                 </thead>
@@ -80,6 +82,7 @@ const BooksCrud = () => {
                       <td>{book.titulo}</td>
                       <td>{book.autor}</td>
                       <td>{book.genero}</td>
+                      <td> <img src={book.base64Portada} width={70} height={70}></img> </td>
                       <td>
                         <button className='botonEditar btn btn-sm' onClick={() => handleEditBook(book)}>Editar</button>
                         <button className='botonEliminar btn btn-sm' onClick={() => handleDeleteBook(book.id)}>Eliminar</button>

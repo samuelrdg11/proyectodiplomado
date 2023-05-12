@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { db } from '../firebase';
-import { Card, Modal, Form, Button } from 'react-bootstrap';
+import { Card, Modal, Button } from 'react-bootstrap';
 import BookModal from './BookModal';
 import { useNavigate } from 'react-router-dom'
 import { auth } from '../firebase'
 
 const BooksCrud = () => {
   const [books, setBooks] = useState([]);
-  const [showModal, setShowModal] = useState(false);
+  const [modalAddBook, setModalAddBook] = useState(false);
   const [editId, setEditId] = useState(null)
   const [search, setSearch] = useState('');
   const [user, setUser] = React.useState(null)
@@ -33,37 +33,33 @@ const BooksCrud = () => {
     return unsubscribe;
   }, []);
 
-  const handleAddBook = () => {
+  const addBook = () => {
     setEditId(null);
-    setShowModal(true);
+    setModalAddBook(true);
   };
 
-  const handleEditBook = book => {
+  const editBook = book => {
     setEditId(book.id);
-    setShowModal(true);
+    setModalAddBook(true);
   };
 
-  const handleDeleteBook = bookId => {
+  const deleteBook = bookId => {
     db.collection('books').doc(bookId).delete();
   };
 
-  const handleCloseModal = () => {
-    setShowModal(false);
+  const closeModalAddBook = () => {
+    setModalAddBook(false);
   };
   const closeModalConfirmation = () => {
     setShowConfirmModal(false);
   };
 
-  const handleBorrowBook = book => {
-    setSelectedBook(book);
-    setShowConfirmModal(true);
-  };
-  const returnBook = book => {
+  const borrowBook = book => {
     setSelectedBook(book);
     setShowConfirmModal(true);
   };
 
-  const handleConfirmBorrowBook = () => {
+  const confirmBorrowBook = () => {
     db.collection('books').doc(selectedBook.id).update({ disponibilidad: !selectedBook.disponibilidad });
     setShowConfirmModal(false);
   };
@@ -79,9 +75,9 @@ const BooksCrud = () => {
         />
       </div>
       <div>
-        <button className='botonAñadir btn btn-sm' onClick={handleAddBook}>Agregar libro</button>
-        <Modal show={showModal} onHide={handleCloseModal}>
-          <BookModal onClose={handleCloseModal} editId={editId} />
+        <button className='botonAñadir btn btn-sm' onClick={addBook}>Agregar libro</button>
+        <Modal show={modalAddBook} onHide={closeModalAddBook}>
+          <BookModal onClose={closeModalAddBook} editId={editId} />
         </Modal>
         {showConfirmModal && (
           <Modal show={showConfirmModal} onHide={closeModalConfirmation}>
@@ -95,7 +91,7 @@ const BooksCrud = () => {
               <Button variant="secondary" onClick={closeModalConfirmation}>
                 Cancelar
               </Button>
-              <Button variant="primary" onClick={handleConfirmBorrowBook}>
+              <Button variant="primary" onClick={confirmBorrowBook}>
                 Confirmar
               </Button>
             </Modal.Footer>
@@ -116,16 +112,16 @@ const BooksCrud = () => {
                 <Card.Text>{book.genero}</Card.Text>
                 <Card.Text><strong>{book.disponibilidad ? 'Disponible' : 'Prestado'}</strong> </Card.Text>
                 {book.disponibilidad ?
-                  <Card.Text> <Button variant="success" onClick={() => handleBorrowBook(book)}>Prestar</Button></Card.Text>
+                  <Card.Text> <Button variant="success" onClick={() => borrowBook(book)}>Prestar</Button></Card.Text>
                   :
-                  <Card.Text><Button variant="secondary" onClick={() => handleBorrowBook(book)}>Devolver</Button></Card.Text>
+                  <Card.Text><Button variant="secondary" onClick={() => borrowBook(book)}>Devolver</Button></Card.Text>
                 }
-                <button className='botonEditar btn btn-sm' onClick={() => handleEditBook(book)}>Editar</button>
-                <button className='botonEliminar btn btn-sm' onClick={() => handleDeleteBook(book.id)}>Eliminar</button>
+                <button className='botonEditar btn btn-sm' onClick={() => editBook(book)}>Editar</button>
+                <button className='botonEliminar btn btn-sm' onClick={() => deleteBook(book.id)}>Eliminar</button>
               </Card.Body>
             </Card>
           ))}
-          <BookModal showModal={showModal} handleCloseModal={handleCloseModal} editId={editId} />
+          <BookModal showModal={modalAddBook} handleCloseModal={closeModalAddBook} editId={editId} />
         </div >
       </div>
     </>

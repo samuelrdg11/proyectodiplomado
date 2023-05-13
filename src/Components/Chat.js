@@ -9,13 +9,13 @@ export default function Chat () {
   const handleOptionClick = (option) => {
     switch (option) {
       case "¿Donde puedo prestar un libro?":
-        setSelectedOption("En la sección 'prestamos y devoluciones' podrás tanto solicitar como devolver.");
+        setSelectedOption("En la sección de cada libro podrás solicitar el prestamo.");
         break;
       case "¿Puedo solicitar varios libros a la vez?":
         setSelectedOption("¡Por supuesto que sí!");
         break;
       case "¿Cuántos libros tenemos en el inventario?":
-        setSelectedOption("Alrededor de 15 libros");
+        setSelectedOption("En estos momentos contamos con 10.");
         break;
       default:
         setSelectedOption("");

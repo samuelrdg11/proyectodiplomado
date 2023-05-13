@@ -25,7 +25,7 @@ const Navbar = (props) => {
                   ):
                   (
                     <>
-                      <Link to="/" className='botones btn btn-sm'>Inicio</Link>
+                   
                     </>
                   )
                 }

@@ -1,10 +1,16 @@
 import React, { useState } from "react";
 import { Modal, Button } from "react-bootstrap";
 
-export default function Chat () {
+export default function Chat() {
   const [showModal, setShowModal] = useState(false);
   const [selectedOption, setSelectedOption] = useState("");
-  const options = ["¿Donde puedo prestar un libro?", "¿Puedo solicitar varios libros a la vez?", "¿Cuántos libros tenemos en el inventario?"];
+  const options = ["¿Donde puedo prestar un libro?",
+    "¿Puedo solicitar varios libros a la vez?",
+    "¿Cuántos libros tenemos en el inventario?",
+    "¿Puedo solicitar libros que no están?",
+    "¿Por cuánto tiempo puedo tener prestado un libro?",
+    "¿Puedo sugerir libros para que sean agregados?"
+  ];
 
   const handleOptionClick = (option) => {
     switch (option) {
@@ -16,6 +22,15 @@ export default function Chat () {
         break;
       case "¿Cuántos libros tenemos en el inventario?":
         setSelectedOption("En estos momentos contamos con 10.");
+        break;
+      case "¿Puedo solicitar libros que no están?":
+        setSelectedOption("En estos momentos no. Pero podrás hacer la solicitud al siguiente correo 'booker@gmail.com'");
+        break;
+      case "¿Por cuánto tiempo puedo tener prestado un libro?":
+        setSelectedOption("De momento no hay restricción.");
+        break;
+      case "¿Puedo sugerir libros para que sean agregados?":
+        setSelectedOption("Sí, pero será en una fucturá actualización");
         break;
       default:
         setSelectedOption("");
@@ -38,17 +53,17 @@ export default function Chat () {
         <Modal.Header closeButton>
           <Modal.Title>¡Habla con nosotros!</Modal.Title>
         </Modal.Header>
-        <Modal.Body>     
+        <Modal.Body>
           {options.map((option) => (
-          <div style={{flexDirection: 'row', marginBottom: '8px'}}>  
-            <Button
-              key={option}
-              className="botonesChat"
-              onClick={() => handleOptionClick(option)}
-            >
-              {option}
-            </Button>
-          </div>  
+            <div style={{ flexDirection: 'row', marginBottom: '8px' }}>
+              <Button
+                key={option}
+                className="botonesChat"
+                onClick={() => handleOptionClick(option)}
+              >
+                {option}
+              </Button>
+            </div>
           ))}
           {selectedOption && <p className="mensaje">{selectedOption}</p>}
         </Modal.Body>

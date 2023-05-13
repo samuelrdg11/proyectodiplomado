@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { db } from '../firebase';
-import { Card, Modal, Button } from 'react-bootstrap';
+import { Modal, Button } from 'react-bootstrap';
 import BookModal from './BookModal';
 import { useNavigate } from 'react-router-dom'
 import { auth } from '../firebase'

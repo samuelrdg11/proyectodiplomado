@@ -20,14 +20,12 @@ const Navbar = (props) => {
                   props.firebaseUser !==null ?
                   (
                     <>
-                    <Link to="/Books" className='botones btn btn-sm'>Book Admin</Link>
                     <button className='botones btn btn-sm' onClick={()=>cerrarSesion()}>LogOut</button>
                     </>
                   ):
                   (
                     <>
                       <Link to="/" className='botones btn btn-sm'>Inicio</Link>
-                      <Link to="/LogIn" className='botones btn btn-sm'>LogIn</Link>
                     </>
                   )
                 }

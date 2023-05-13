@@ -104,22 +104,25 @@ const BooksCrud = () => {
             return search.toLocaleLowerCase() === '' ?
               book : book.autor.toLocaleLowerCase().includes(search.toLocaleLowerCase()) || book.titulo.toLocaleLowerCase().includes(search.toLocaleLowerCase())
           }).map((book) => (
-            <Card style={{ width: '18rem' }}>
-              <Card.Img variant="top" src={book.base64Portada} />
-              <Card.Body>
-                <Card.Title>{book.titulo}</Card.Title>
-                <Card.Text>{book.autor}</Card.Text>
-                <Card.Text>{book.genero}</Card.Text>
-                <Card.Text><strong>{book.disponibilidad ? 'Disponible' : 'Prestado'}</strong> </Card.Text>
-                {book.disponibilidad ?
-                  <Card.Text> <Button variant="success" onClick={() => borrowBook(book)}>Prestar</Button></Card.Text>
-                  :
-                  <Card.Text><Button variant="secondary" onClick={() => borrowBook(book)}>Devolver</Button></Card.Text>
-                }
-                <button className='botonEditar btn btn-sm' onClick={() => editBook(book)}>Editar</button>
-                <button className='botonEliminar btn btn-sm' onClick={() => deleteBook(book.id)}>Eliminar</button>
-              </Card.Body>
-            </Card>
+            <div class="col-sm-6 col-md-4 col-lg-3 mt-4">
+              <div class="card">
+                <img src={book.base64Portada} class="card-img book-cover" alt='caratula'></img>
+                <div class="card-body">
+                  <h5 class="card-title">{book.titulo}</h5>
+                  <h6 class="card-subtitle mb-2 text-muted">{book.autor}</h6>
+                  <p class="card-text">{book.genero}</p>
+                  <p><strong>{book.disponibilidad ? 'Disponible' : 'Prestado'}</strong> </p>
+                  {book.disponibilidad ?
+
+                    <div className='mb-4'> <button className='btnPrestamo btn btn-sm' onClick={() => borrowBook(book)}>Prestar</button></div>
+                    :
+                    <div className='mb-4'><button className='btnDevolucion btn btn-sm' onClick={() => borrowBook(book)}>Devolver</button></div>
+                  }
+                  <button className='botonEditar btn btn-sm' onClick={() => editBook(book)}>Editar</button>
+                  <button className='botonEliminar btn btn-sm' onClick={() => deleteBook(book.id)}>Eliminar</button>
+                </div>
+              </div>
+            </div>
           ))}
           <BookModal showModal={modalAddBook} handleCloseModal={closeModalAddBook} editId={editId} />
         </div >

@@ -76,8 +76,8 @@
     width: 270px;
   }
   .botonEditar {
-    margin-right: 0px;
-    margin-bottom: 5px;
+    margin-right: 5px;
+    margin-bottom: 0px;
   }
   .tableBooks {
     font-size: 13px;
@@ -101,6 +101,44 @@ svg {
   font-size: 12px;
   padding: 6px;
   background-color: #2497c5e3;
+  color: #ffff;
+  border-radius: 8px;
+  border: none;
+  text-decoration: none;
+}
+
+.card {
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.book-cover {
+  height: 250px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.btnPrestamo {
+  width: '35%';
+  font-size: 12px;
+  padding: 6px;
+  background-color:black;
+  color: #ffff;
+  border-radius: 8px;
+  border: none;
+  text-decoration: none;
+}
+.btnDevolucion {
+  width: '35%';
+  font-size: 12px;
+  padding: 6px;
+  background-color: #8a8a8ae3;
   color: #ffff;
   border-radius: 8px;
   border: none;

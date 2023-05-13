@@ -95,7 +95,7 @@ const LogIn = () => {
         )
       }
       <div className='main'>
-        <div className="row justify-content-center">
+        <div className="campos row justify-content-center">
           <h5 className='text-center mb-3 mt-3'>
             {
               registro ? 'Crea una cuenta' : 'Inicio de sesión'
@@ -126,7 +126,7 @@ const LogIn = () => {
                 type='button'
               >
                 {
-                  registro ? '¿Ya estás registrado?' : '¿No tienes cuenta?'
+                  <div className='switch'>{registro ? '¿Ya estás registrado?' : '¿No tienes cuenta?'}</div>
                 }
               </button>
             </div>

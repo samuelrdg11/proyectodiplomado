@@ -13,6 +13,8 @@ const BooksCrud = () => {
   const [user, setUser] = React.useState(null)
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [selectedBook, setSelectedBook] = useState(null);
+  const [loading, setLoading] = useState(false);
+
   const navigate = useNavigate()
 
   React.useEffect(() => {
@@ -57,11 +59,16 @@ const BooksCrud = () => {
   const borrowBook = book => {
     setSelectedBook(book);
     setShowConfirmModal(true);
+    
   };
 
   const confirmBorrowBook = () => {
-    db.collection('books').doc(selectedBook.id).update({ disponibilidad: !selectedBook.disponibilidad });
-    setShowConfirmModal(false);
+    setLoading(true);
+    setTimeout(() => {
+      db.collection('books').doc(selectedBook.id).update({ disponibilidad: !selectedBook.disponibilidad });
+      setShowConfirmModal(false);;
+      setLoading(false);
+    }, 2000); 
   };
 
   return (
@@ -74,6 +81,7 @@ const BooksCrud = () => {
           onChange={(e) => setSearch(e.target.value)}
         />
       </div>
+      {loading && <div className="chargeLoading"><div className="loading"></div></div>}
       <div>
         <button className='botonAñadir btn btn-sm' onClick={addBook}>Agregar libro</button>
         <Modal show={modalAddBook} onHide={closeModalAddBook}>
